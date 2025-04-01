@@ -75,6 +75,21 @@ jobs:
         run: |
           #zip -q -x ".git/*" -x  ".github/*" -r sourceCode-${{ env.commitS }}.zip .
           tar -cJf sourceCode-${{ env.commitS }}.tar.xz --exclude=.git --exclude=.github *
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.8'
+
+      - name: Modify pyramid——build.gradle
+        working-directory: TVBoxOSC
+        run: |
+          # 替换Windows路径为系统Python路径
+          # sed -i "s|buildPython(\"D:/Programs/Python/Python38/python.exe\")|buildPython(\"/usr/bin/python3\")|g" pyramid/build.gradle
+          sed -i '/buildPython("D:\/Programs\/Python\/Python38\/python.exe")/d' pyramid/build.gradle
+
+      - name: Setup Python local.properties
+        working-directory: TVBoxOSC
+        run: echo "" > local.properties    
       - name: Release Apk Sign
         if: ${{ env.commit }}
         working-directory: TVBoxOSC
