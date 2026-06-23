@@ -2,7 +2,7 @@ name: Test
 
 on:
   schedule:
-    - cron: 59 */8 * * *
+    - cron: 59 */23 * * *
   workflow_dispatch:
     inputs:
       rebuild:
