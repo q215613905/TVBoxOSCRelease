@@ -23,7 +23,7 @@ jobs:
         include:
           - userName: q215613905
             repoName: TVBoxOS
-            branchName: main
+            branchName: dev
     steps:
       - name: Checkout
         uses: actions/checkout@v4
